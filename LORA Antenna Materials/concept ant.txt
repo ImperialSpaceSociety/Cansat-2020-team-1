@@ -1,0 +1,31 @@
+CM This is a example
+SY w_diam=5e-4
+CE
+GW	0	2	2.e-3	0	0	0	0	0	w_diam
+GW	1	6	0	0	0	-7.e-3	0	0	w_diam
+GW	2	1	-7.e-3	0	0	-7.e-3	0	1.4e-3	w_diam
+GW	3	6	-7.e-3	0	1.4e-3	0	0	1.4e-3	w_diam
+GW	4	1	0	0	1.4e-3	0	0	2.8e-3	w_diam
+GW	5	6	0	0	2.8e-3	-7.e-3	0	2.8e-3	w_diam
+GW	6	1	-7.e-3	0	2.8e-3	-7.e-3	0	4.2e-3	w_diam
+GW	7	6	-7.e-3	0	4.2e-3	2.1684e-19	0	4.2e-3	w_diam
+GW	8	1	0	0	4.2e-3	0	0	5.6e-3	w_diam
+GW	9	6	0	0	5.6e-3	-7.e-3	0	5.6e-3	w_diam
+GW	10	1	-7.e-3	0	5.6e-3	-7.e-3	0	7.e-3	w_diam
+GW	14	6	-5.6e-3	1.6e-3	0	-5.6e-3	1.6e-3	7.e-3	w_diam
+GW	15	1	-5.6e-3	1.6e-3	7.e-3	-4.2e-3	1.6e-3	7.e-3	w_diam
+GW	16	6	-4.2e-3	1.6e-3	7.e-3	-4.2e-3	1.6e-3	0	w_diam
+GW	17	1	-4.2e-3	1.6e-3	0	-2.8e-3	1.6e-3	0	w_diam
+GW	18	6	-2.8e-3	1.6e-3	0	-2.8e-3	1.6e-3	7.e-3	w_diam
+GW	19	1	-2.8e-3	1.6e-3	7.e-3	-1.4e-3	1.6e-3	7.e-3	w_diam
+GW	20	6	-1.4e-3	1.6e-3	7.e-3	-1.4e-3	1.6e-3	0	w_diam
+GW	21	1	-1.4e-3	1.6e-3	0	0	1.6e-3	0	w_diam
+GW	22	6	-7.e-3	1.6e-3	7.e-3	-7.e-3	1.6e-3	0	w_diam
+GW	23	1	-7.e-3	0	7.e-3	-7.e-3	1.6e-3	7.e-3	w_diam
+GW	24	1	-7.e-3	1.6e-3	0	-5.6e-3	1.6e-3	0	w_diam
+GE	0
+EK
+LD	5	0	0	0	3.77e7	0
+EX	0	0	1	0	1	0
+GN	-1
+FR	0	1	0	0	868	0

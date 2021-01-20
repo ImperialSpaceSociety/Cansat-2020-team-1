@@ -1,0 +1,51 @@
+CM This is a example
+SY diameter=11.60301mm
+SY w_diam=0.989593mm
+SY theta=7.258112
+CM Wire up
+GW	0	5	0	0	-10mm	0	0	0	w_diam
+CM forw: 90, 0 ; back: 90, 180
+CE Splays
+GW	1	7	0	0	0	diameter	0	0	w_diam
+GW	2	7	0	0	0	-diameter	0	0	w_diam
+GW	3	7	0	0	0	0	diameter	0	w_diam
+GW	4	7	0	0	0	0	-diameter	0	w_diam
+CM forw: 90, 0 ; back: 90, 180
+CE Arm 1
+GW	5	1	diameter	0	0	diameter*cos(theta)	-diameter*sin(theta)	0	w_diam
+GW	6	1	diameter*cos(theta)	-diameter*sin(theta)	0	diameter*cos(2*theta)	-diameter*sin(2*theta)	0	w_diam
+GW	7	1	diameter*cos(2*theta)	-diameter*sin(2*theta)	0	diameter*cos(3*theta)	-diameter*sin(3*theta)	0	w_diam
+GW	8	1	diameter*cos(3*theta)	-diameter*sin(3*theta)	0	diameter*cos(4*theta)	-diameter*sin(4*theta)	0	w_diam
+GW	9	1	diameter*cos(4*theta)	-diameter*sin(4*theta)	0	diameter*cos(5*theta)	-diameter*sin(5*theta)	0	w_diam
+CM forw: 90, 0 ; back: 90, 180
+CE Arm 2
+GW	10	1	0	diameter	0	diameter*sin(theta)	diameter*cos(theta)	0	w_diam
+GW	11	1	diameter*sin(theta)	diameter*cos(theta)	0	diameter*sin(2*theta)	diameter*cos(2*theta)	0	w_diam
+GW	12	1	diameter*sin(2*theta)	diameter*cos(2*theta)	0	diameter*sin(3*theta)	diameter*cos(3*theta)	0	w_diam
+GW	13	1	diameter*sin(3*theta)	diameter*cos(3*theta)	0	diameter*sin(4*theta)	diameter*cos(4*theta)	0	w_diam
+GW	14	1	diameter*sin(4*theta)	diameter*cos(4*theta)	0	diameter*sin(5*theta)	diameter*cos(5*theta)	0	w_diam
+CM forw: 90, 0 ; back: 90, 180
+CE Arm 3
+GW	15	1	-diameter	0	0	-diameter*cos(theta)	diameter*sin(theta)	0	w_diam
+GW	16	1	-diameter*cos(theta)	diameter*sin(theta)	0	-diameter*cos(2*theta)	diameter*sin(2*theta)	0	w_diam
+GW	17	1	-diameter*cos(2*theta)	diameter*sin(2*theta)	0	-diameter*cos(3*theta)	diameter*sin(3*theta)	0	w_diam
+GW	18	1	-diameter*cos(3*theta)	diameter*sin(3*theta)	0	-diameter*cos(4*theta)	diameter*sin(4*theta)	0	w_diam
+GW	19	1	-diameter*cos(4*theta)	diameter*sin(4*theta)	0	-diameter*cos(5*theta)	diameter*sin(5*theta)	0	w_diam
+CM forw: 90, 0 ; back: 90, 180
+CE Arm 4
+GW	20	1	0	-diameter	0	-diameter*sin(theta)	-diameter*cos(theta)	0	w_diam
+GW	21	1	-diameter*sin(theta)	-diameter*cos(theta)	0	-diameter*sin(2*theta)	-diameter*cos(2*theta)	0	w_diam
+GW	22	1	-diameter*sin(2*theta)	-diameter*cos(2*theta)	0	-diameter*sin(3*theta)	-diameter*cos(3*theta)	0	w_diam
+GW	23	1	-diameter*sin(3*theta)	-diameter*cos(3*theta)	0	-diameter*sin(4*theta)	-diameter*cos(4*theta)	0	w_diam
+GW	24	1	-diameter*sin(4*theta)	-diameter*cos(4*theta)	0	-diameter*sin(5*theta)	-diameter*cos(5*theta)	0	w_diam
+GE	0
+CM Specify material 
+LD	5	0	0	0	37700000	0
+CM Specify excitation
+EX	0	0	1	0	1	0
+CM Specify ground
+GN	-1
+FR,0,1,0,0,868
+PQ -1
+PT -1
+RP,0,37,73,1003,-180,0,5,5

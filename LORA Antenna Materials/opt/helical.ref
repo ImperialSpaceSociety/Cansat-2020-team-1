@@ -1,0 +1,134 @@
+CM This is a example
+SY diameter=10mm
+SY w_diam=0.5mm
+SY theta=20
+SY pitch=5mm
+CM Wire in
+GW	0	3	diameter+10mm	0	0	diameter	0	0	w_diam
+CM loop 1
+GW	1	1	diameter*cos(theta*0)	diameter*sin(theta*0)	0*pitch/18	diameter*cos(theta*1)	diameter*sin(theta*1)	1*pitch/18	w_diam
+GW	2	1	diameter*cos(theta*1)	diameter*sin(theta*1)	1*pitch/18	diameter*cos(theta*2)	diameter*sin(theta*2)	2*pitch/18	w_diam
+GW	3	1	diameter*cos(theta*2)	diameter*sin(theta*2)	2*pitch/18	diameter*cos(theta*3)	diameter*sin(theta*3)	3*pitch/18	w_diam
+GW	4	1	diameter*cos(theta*3)	diameter*sin(theta*3)	3*pitch/18	diameter*cos(theta*4)	diameter*sin(theta*4)	4*pitch/18	w_diam
+GW	5	1	diameter*cos(theta*4)	diameter*sin(theta*4)	4*pitch/18	diameter*cos(theta*5)	diameter*sin(theta*5)	5*pitch/18	w_diam
+GW	6	1	diameter*cos(theta*5)	diameter*sin(theta*5)	5*pitch/18	diameter*cos(theta*6)	diameter*sin(theta*6)	6*pitch/18	w_diam
+GW	7	1	diameter*cos(theta*6)	diameter*sin(theta*6)	6*pitch/18	diameter*cos(theta*7)	diameter*sin(theta*7)	7*pitch/18	w_diam
+GW	8	1	diameter*cos(theta*7)	diameter*sin(theta*7)	7*pitch/18	diameter*cos(theta*8)	diameter*sin(theta*8)	8*pitch/18	w_diam
+GW	9	1	diameter*cos(theta*8)	diameter*sin(theta*8)	8*pitch/18	diameter*cos(theta*9)	diameter*sin(theta*9)	9*pitch/18	w_diam
+GW	10	1	diameter*cos(theta*9)	diameter*sin(theta*9)	9*pitch/18	diameter*cos(theta*10)	diameter*sin(theta*10)	10*pitch/18	w_diam
+GW	11	1	diameter*cos(theta*10)	diameter*sin(theta*10)	10*pitch/18	diameter*cos(theta*11)	diameter*sin(theta*11)	11*pitch/18	w_diam
+GW	12	1	diameter*cos(theta*11)	diameter*sin(theta*11)	11*pitch/18	diameter*cos(theta*12)	diameter*sin(theta*12)	12*pitch/18	w_diam
+GW	13	1	diameter*cos(theta*12)	diameter*sin(theta*12)	12*pitch/18	diameter*cos(theta*13)	diameter*sin(theta*13)	13*pitch/18	w_diam
+GW	14	1	diameter*cos(theta*13)	diameter*sin(theta*13)	13*pitch/18	diameter*cos(theta*14)	diameter*sin(theta*14)	14*pitch/18	w_diam
+GW	15	1	diameter*cos(theta*14)	diameter*sin(theta*14)	14*pitch/18	diameter*cos(theta*15)	diameter*sin(theta*15)	15*pitch/18	w_diam
+GW	16	1	diameter*cos(theta*15)	diameter*sin(theta*15)	15*pitch/18	diameter*cos(theta*16)	diameter*sin(theta*16)	16*pitch/18	w_diam
+GW	17	1	diameter*cos(theta*16)	diameter*sin(theta*16)	16*pitch/18	diameter*cos(theta*17)	diameter*sin(theta*17)	17*pitch/18	w_diam
+GW	18	1	diameter*cos(theta*17)	diameter*sin(theta*17)	17*pitch/18	diameter*cos(theta*18)	diameter*sin(theta*18)	18*pitch/18	w_diam
+CM loop 2
+GW	19	1	diameter*cos(theta*0)	diameter*sin(theta*0)	1*pitch+0*pitch/18	diameter*cos(theta*1)	diameter*sin(theta*1)	1*pitch+1*pitch/18	w_diam
+GW	20	1	diameter*cos(theta*1)	diameter*sin(theta*1)	1*pitch+1*pitch/18	diameter*cos(theta*2)	diameter*sin(theta*2)	1*pitch+2*pitch/18	w_diam
+GW	21	1	diameter*cos(theta*2)	diameter*sin(theta*2)	1*pitch+2*pitch/18	diameter*cos(theta*3)	diameter*sin(theta*3)	1*pitch+3*pitch/18	w_diam
+GW	22	1	diameter*cos(theta*3)	diameter*sin(theta*3)	1*pitch+3*pitch/18	diameter*cos(theta*4)	diameter*sin(theta*4)	1*pitch+4*pitch/18	w_diam
+GW	23	1	diameter*cos(theta*4)	diameter*sin(theta*4)	1*pitch+4*pitch/18	diameter*cos(theta*5)	diameter*sin(theta*5)	1*pitch+5*pitch/18	w_diam
+GW	24	1	diameter*cos(theta*5)	diameter*sin(theta*5)	1*pitch+5*pitch/18	diameter*cos(theta*6)	diameter*sin(theta*6)	1*pitch+6*pitch/18	w_diam
+GW	25	1	diameter*cos(theta*6)	diameter*sin(theta*6)	1*pitch+6*pitch/18	diameter*cos(theta*7)	diameter*sin(theta*7)	1*pitch+7*pitch/18	w_diam
+GW	26	1	diameter*cos(theta*7)	diameter*sin(theta*7)	1*pitch+7*pitch/18	diameter*cos(theta*8)	diameter*sin(theta*8)	1*pitch+8*pitch/18	w_diam
+GW	27	1	diameter*cos(theta*8)	diameter*sin(theta*8)	1*pitch+8*pitch/18	diameter*cos(theta*9)	diameter*sin(theta*9)	1*pitch+9*pitch/18	w_diam
+GW	28	1	diameter*cos(theta*9)	diameter*sin(theta*9)	1*pitch+9*pitch/18	diameter*cos(theta*10)	diameter*sin(theta*10)	1*pitch+10*pitch/18	w_diam
+GW	29	1	diameter*cos(theta*10)	diameter*sin(theta*10)	1*pitch+10*pitch/18	diameter*cos(theta*11)	diameter*sin(theta*11)	1*pitch+11*pitch/18	w_diam
+GW	30	1	diameter*cos(theta*11)	diameter*sin(theta*11)	1*pitch+11*pitch/18	diameter*cos(theta*12)	diameter*sin(theta*12)	1*pitch+12*pitch/18	w_diam
+GW	31	1	diameter*cos(theta*12)	diameter*sin(theta*12)	1*pitch+12*pitch/18	diameter*cos(theta*13)	diameter*sin(theta*13)	1*pitch+13*pitch/18	w_diam
+GW	32	1	diameter*cos(theta*13)	diameter*sin(theta*13)	1*pitch+13*pitch/18	diameter*cos(theta*14)	diameter*sin(theta*14)	1*pitch+14*pitch/18	w_diam
+GW	33	1	diameter*cos(theta*14)	diameter*sin(theta*14)	1*pitch+14*pitch/18	diameter*cos(theta*15)	diameter*sin(theta*15)	1*pitch+15*pitch/18	w_diam
+GW	34	1	diameter*cos(theta*15)	diameter*sin(theta*15)	1*pitch+15*pitch/18	diameter*cos(theta*16)	diameter*sin(theta*16)	1*pitch+16*pitch/18	w_diam
+GW	35	1	diameter*cos(theta*16)	diameter*sin(theta*16)	1*pitch+16*pitch/18	diameter*cos(theta*17)	diameter*sin(theta*17)	1*pitch+17*pitch/18	w_diam
+GW	36	1	diameter*cos(theta*17)	diameter*sin(theta*17)	1*pitch+17*pitch/18	diameter*cos(theta*18)	diameter*sin(theta*18)	1*pitch+18*pitch/18	w_diam
+CM loop 3
+GW	37	1	diameter*cos(theta*0)	diameter*sin(theta*0)	2*pitch+0*pitch/18	diameter*cos(theta*1)	diameter*sin(theta*1)	2*pitch+1*pitch/18	w_diam
+GW	38	1	diameter*cos(theta*1)	diameter*sin(theta*1)	2*pitch+1*pitch/18	diameter*cos(theta*2)	diameter*sin(theta*2)	2*pitch+2*pitch/18	w_diam
+GW	39	1	diameter*cos(theta*2)	diameter*sin(theta*2)	2*pitch+2*pitch/18	diameter*cos(theta*3)	diameter*sin(theta*3)	2*pitch+3*pitch/18	w_diam
+GW	40	1	diameter*cos(theta*3)	diameter*sin(theta*3)	2*pitch+3*pitch/18	diameter*cos(theta*4)	diameter*sin(theta*4)	2*pitch+4*pitch/18	w_diam
+GW	41	1	diameter*cos(theta*4)	diameter*sin(theta*4)	2*pitch+4*pitch/18	diameter*cos(theta*5)	diameter*sin(theta*5)	2*pitch+5*pitch/18	w_diam
+GW	42	1	diameter*cos(theta*5)	diameter*sin(theta*5)	2*pitch+5*pitch/18	diameter*cos(theta*6)	diameter*sin(theta*6)	2*pitch+6*pitch/18	w_diam
+GW	43	1	diameter*cos(theta*6)	diameter*sin(theta*6)	2*pitch+6*pitch/18	diameter*cos(theta*7)	diameter*sin(theta*7)	2*pitch+7*pitch/18	w_diam
+GW	44	1	diameter*cos(theta*7)	diameter*sin(theta*7)	2*pitch+7*pitch/18	diameter*cos(theta*8)	diameter*sin(theta*8)	2*pitch+8*pitch/18	w_diam
+GW	45	1	diameter*cos(theta*8)	diameter*sin(theta*8)	2*pitch+8*pitch/18	diameter*cos(theta*9)	diameter*sin(theta*9)	2*pitch+9*pitch/18	w_diam
+GW	46	1	diameter*cos(theta*9)	diameter*sin(theta*9)	2*pitch+9*pitch/18	diameter*cos(theta*10)	diameter*sin(theta*10)	2*pitch+10*pitch/18	w_diam
+GW	47	1	diameter*cos(theta*10)	diameter*sin(theta*10)	2*pitch+10*pitch/18	diameter*cos(theta*11)	diameter*sin(theta*11)	2*pitch+11*pitch/18	w_diam
+GW	48	1	diameter*cos(theta*11)	diameter*sin(theta*11)	2*pitch+11*pitch/18	diameter*cos(theta*12)	diameter*sin(theta*12)	2*pitch+12*pitch/18	w_diam
+GW	49	1	diameter*cos(theta*12)	diameter*sin(theta*12)	2*pitch+12*pitch/18	diameter*cos(theta*13)	diameter*sin(theta*13)	2*pitch+13*pitch/18	w_diam
+GW	50	1	diameter*cos(theta*13)	diameter*sin(theta*13)	2*pitch+13*pitch/18	diameter*cos(theta*14)	diameter*sin(theta*14)	2*pitch+14*pitch/18	w_diam
+GW	51	1	diameter*cos(theta*14)	diameter*sin(theta*14)	2*pitch+14*pitch/18	diameter*cos(theta*15)	diameter*sin(theta*15)	2*pitch+15*pitch/18	w_diam
+GW	52	1	diameter*cos(theta*15)	diameter*sin(theta*15)	2*pitch+15*pitch/18	diameter*cos(theta*16)	diameter*sin(theta*16)	2*pitch+16*pitch/18	w_diam
+GW	53	1	diameter*cos(theta*16)	diameter*sin(theta*16)	2*pitch+16*pitch/18	diameter*cos(theta*17)	diameter*sin(theta*17)	2*pitch+17*pitch/18	w_diam
+GW	54	1	diameter*cos(theta*17)	diameter*sin(theta*17)	2*pitch+17*pitch/18	diameter*cos(theta*18)	diameter*sin(theta*18)	2*pitch+18*pitch/18	w_diam
+CM loop 4
+GW	55	1	diameter*cos(theta*0)	diameter*sin(theta*0)	3*pitch+0*pitch/18	diameter*cos(theta*1)	diameter*sin(theta*1)	3*pitch+1*pitch/18	w_diam
+GW	56	1	diameter*cos(theta*1)	diameter*sin(theta*1)	3*pitch+1*pitch/18	diameter*cos(theta*2)	diameter*sin(theta*2)	3*pitch+2*pitch/18	w_diam
+GW	57	1	diameter*cos(theta*2)	diameter*sin(theta*2)	3*pitch+2*pitch/18	diameter*cos(theta*3)	diameter*sin(theta*3)	3*pitch+3*pitch/18	w_diam
+GW	58	1	diameter*cos(theta*3)	diameter*sin(theta*3)	3*pitch+3*pitch/18	diameter*cos(theta*4)	diameter*sin(theta*4)	3*pitch+4*pitch/18	w_diam
+GW	59	1	diameter*cos(theta*4)	diameter*sin(theta*4)	3*pitch+4*pitch/18	diameter*cos(theta*5)	diameter*sin(theta*5)	3*pitch+5*pitch/18	w_diam
+GW	60	1	diameter*cos(theta*5)	diameter*sin(theta*5)	3*pitch+5*pitch/18	diameter*cos(theta*6)	diameter*sin(theta*6)	3*pitch+6*pitch/18	w_diam
+GW	61	1	diameter*cos(theta*6)	diameter*sin(theta*6)	3*pitch+6*pitch/18	diameter*cos(theta*7)	diameter*sin(theta*7)	3*pitch+7*pitch/18	w_diam
+GW	62	1	diameter*cos(theta*7)	diameter*sin(theta*7)	3*pitch+7*pitch/18	diameter*cos(theta*8)	diameter*sin(theta*8)	3*pitch+8*pitch/18	w_diam
+GW	63	1	diameter*cos(theta*8)	diameter*sin(theta*8)	3*pitch+8*pitch/18	diameter*cos(theta*9)	diameter*sin(theta*9)	3*pitch+9*pitch/18	w_diam
+GW	64	1	diameter*cos(theta*9)	diameter*sin(theta*9)	3*pitch+9*pitch/18	diameter*cos(theta*10)	diameter*sin(theta*10)	3*pitch+10*pitch/18	w_diam
+GW	65	1	diameter*cos(theta*10)	diameter*sin(theta*10)	3*pitch+10*pitch/18	diameter*cos(theta*11)	diameter*sin(theta*11)	3*pitch+11*pitch/18	w_diam
+GW	66	1	diameter*cos(theta*11)	diameter*sin(theta*11)	3*pitch+11*pitch/18	diameter*cos(theta*12)	diameter*sin(theta*12)	3*pitch+12*pitch/18	w_diam
+GW	67	1	diameter*cos(theta*12)	diameter*sin(theta*12)	3*pitch+12*pitch/18	diameter*cos(theta*13)	diameter*sin(theta*13)	3*pitch+13*pitch/18	w_diam
+GW	68	1	diameter*cos(theta*13)	diameter*sin(theta*13)	3*pitch+13*pitch/18	diameter*cos(theta*14)	diameter*sin(theta*14)	3*pitch+14*pitch/18	w_diam
+GW	69	1	diameter*cos(theta*14)	diameter*sin(theta*14)	3*pitch+14*pitch/18	diameter*cos(theta*15)	diameter*sin(theta*15)	3*pitch+15*pitch/18	w_diam
+GW	70	1	diameter*cos(theta*15)	diameter*sin(theta*15)	3*pitch+15*pitch/18	diameter*cos(theta*16)	diameter*sin(theta*16)	3*pitch+16*pitch/18	w_diam
+GW	71	1	diameter*cos(theta*16)	diameter*sin(theta*16)	3*pitch+16*pitch/18	diameter*cos(theta*17)	diameter*sin(theta*17)	3*pitch+17*pitch/18	w_diam
+GW	72	1	diameter*cos(theta*17)	diameter*sin(theta*17)	3*pitch+17*pitch/18	diameter*cos(theta*18)	diameter*sin(theta*18)	3*pitch+18*pitch/18	w_diam
+CM loop 5
+GW	73	1	diameter*cos(theta*0)	diameter*sin(theta*0)	4*pitch+0*pitch/18	diameter*cos(theta*1)	diameter*sin(theta*1)	4*pitch+1*pitch/18	w_diam
+GW	74	1	diameter*cos(theta*1)	diameter*sin(theta*1)	4*pitch+1*pitch/18	diameter*cos(theta*2)	diameter*sin(theta*2)	4*pitch+2*pitch/18	w_diam
+GW	75	1	diameter*cos(theta*2)	diameter*sin(theta*2)	4*pitch+2*pitch/18	diameter*cos(theta*3)	diameter*sin(theta*3)	4*pitch+3*pitch/18	w_diam
+GW	76	1	diameter*cos(theta*3)	diameter*sin(theta*3)	4*pitch+3*pitch/18	diameter*cos(theta*4)	diameter*sin(theta*4)	4*pitch+4*pitch/18	w_diam
+GW	77	1	diameter*cos(theta*4)	diameter*sin(theta*4)	4*pitch+4*pitch/18	diameter*cos(theta*5)	diameter*sin(theta*5)	4*pitch+5*pitch/18	w_diam
+GW	78	1	diameter*cos(theta*5)	diameter*sin(theta*5)	4*pitch+5*pitch/18	diameter*cos(theta*6)	diameter*sin(theta*6)	4*pitch+6*pitch/18	w_diam
+GW	79	1	diameter*cos(theta*6)	diameter*sin(theta*6)	4*pitch+6*pitch/18	diameter*cos(theta*7)	diameter*sin(theta*7)	4*pitch+7*pitch/18	w_diam
+GW	80	1	diameter*cos(theta*7)	diameter*sin(theta*7)	4*pitch+7*pitch/18	diameter*cos(theta*8)	diameter*sin(theta*8)	4*pitch+8*pitch/18	w_diam
+GW	81	1	diameter*cos(theta*8)	diameter*sin(theta*8)	4*pitch+8*pitch/18	diameter*cos(theta*9)	diameter*sin(theta*9)	4*pitch+9*pitch/18	w_diam
+GW	82	1	diameter*cos(theta*9)	diameter*sin(theta*9)	4*pitch+9*pitch/18	diameter*cos(theta*10)	diameter*sin(theta*10)	4*pitch+10*pitch/18	w_diam
+GW	83	1	diameter*cos(theta*10)	diameter*sin(theta*10)	4*pitch+10*pitch/18	diameter*cos(theta*11)	diameter*sin(theta*11)	4*pitch+11*pitch/18	w_diam
+GW	84	1	diameter*cos(theta*11)	diameter*sin(theta*11)	4*pitch+11*pitch/18	diameter*cos(theta*12)	diameter*sin(theta*12)	4*pitch+12*pitch/18	w_diam
+GW	85	1	diameter*cos(theta*12)	diameter*sin(theta*12)	4*pitch+12*pitch/18	diameter*cos(theta*13)	diameter*sin(theta*13)	4*pitch+13*pitch/18	w_diam
+GW	86	1	diameter*cos(theta*13)	diameter*sin(theta*13)	4*pitch+13*pitch/18	diameter*cos(theta*14)	diameter*sin(theta*14)	4*pitch+14*pitch/18	w_diam
+GW	87	1	diameter*cos(theta*14)	diameter*sin(theta*14)	4*pitch+14*pitch/18	diameter*cos(theta*15)	diameter*sin(theta*15)	4*pitch+15*pitch/18	w_diam
+GW	88	1	diameter*cos(theta*15)	diameter*sin(theta*15)	4*pitch+15*pitch/18	diameter*cos(theta*16)	diameter*sin(theta*16)	4*pitch+16*pitch/18	w_diam
+GW	89	1	diameter*cos(theta*16)	diameter*sin(theta*16)	4*pitch+16*pitch/18	diameter*cos(theta*17)	diameter*sin(theta*17)	4*pitch+17*pitch/18	w_diam
+GW	90	1	diameter*cos(theta*17)	diameter*sin(theta*17)	4*pitch+17*pitch/18	diameter*cos(theta*18)	diameter*sin(theta*18)	4*pitch+18*pitch/18	w_diam
+CM loop 6
+GW	91	1	diameter*cos(theta*0)	diameter*sin(theta*0)	5*pitch+0*pitch/18	diameter*cos(theta*1)	diameter*sin(theta*1)	5*pitch+1*pitch/18	w_diam
+GW	92	1	diameter*cos(theta*1)	diameter*sin(theta*1)	5*pitch+1*pitch/18	diameter*cos(theta*2)	diameter*sin(theta*2)	5*pitch+2*pitch/18	w_diam
+GW	93	1	diameter*cos(theta*2)	diameter*sin(theta*2)	5*pitch+2*pitch/18	diameter*cos(theta*3)	diameter*sin(theta*3)	5*pitch+3*pitch/18	w_diam
+GW	94	1	diameter*cos(theta*3)	diameter*sin(theta*3)	5*pitch+3*pitch/18	diameter*cos(theta*4)	diameter*sin(theta*4)	5*pitch+4*pitch/18	w_diam
+GW	95	1	diameter*cos(theta*4)	diameter*sin(theta*4)	5*pitch+4*pitch/18	diameter*cos(theta*5)	diameter*sin(theta*5)	5*pitch+5*pitch/18	w_diam
+GW	96	1	diameter*cos(theta*5)	diameter*sin(theta*5)	5*pitch+5*pitch/18	diameter*cos(theta*6)	diameter*sin(theta*6)	5*pitch+6*pitch/18	w_diam
+GW	97	1	diameter*cos(theta*6)	diameter*sin(theta*6)	5*pitch+6*pitch/18	diameter*cos(theta*7)	diameter*sin(theta*7)	5*pitch+7*pitch/18	w_diam
+GW	98	1	diameter*cos(theta*7)	diameter*sin(theta*7)	5*pitch+7*pitch/18	diameter*cos(theta*8)	diameter*sin(theta*8)	5*pitch+8*pitch/18	w_diam
+GW	99	1	diameter*cos(theta*8)	diameter*sin(theta*8)	5*pitch+8*pitch/18	diameter*cos(theta*9)	diameter*sin(theta*9)	5*pitch+9*pitch/18	w_diam
+GW	100	1	diameter*cos(theta*9)	diameter*sin(theta*9)	5*pitch+9*pitch/18	diameter*cos(theta*10)	diameter*sin(theta*10)	5*pitch+10*pitch/18	w_diam
+GW	101	1	diameter*cos(theta*10)	diameter*sin(theta*10)	5*pitch+10*pitch/18	diameter*cos(theta*11)	diameter*sin(theta*11)	5*pitch+11*pitch/18	w_diam
+GW	102	1	diameter*cos(theta*11)	diameter*sin(theta*11)	5*pitch+11*pitch/18	diameter*cos(theta*12)	diameter*sin(theta*12)	5*pitch+12*pitch/18	w_diam
+GW	103	1	diameter*cos(theta*12)	diameter*sin(theta*12)	5*pitch+12*pitch/18	diameter*cos(theta*13)	diameter*sin(theta*13)	5*pitch+13*pitch/18	w_diam
+GW	104	1	diameter*cos(theta*13)	diameter*sin(theta*13)	5*pitch+13*pitch/18	diameter*cos(theta*14)	diameter*sin(theta*14)	5*pitch+14*pitch/18	w_diam
+GW	105	1	diameter*cos(theta*14)	diameter*sin(theta*14)	5*pitch+14*pitch/18	diameter*cos(theta*15)	diameter*sin(theta*15)	5*pitch+15*pitch/18	w_diam
+GW	106	1	diameter*cos(theta*15)	diameter*sin(theta*15)	5*pitch+15*pitch/18	diameter*cos(theta*16)	diameter*sin(theta*16)	5*pitch+16*pitch/18	w_diam
+GW	107	1	diameter*cos(theta*16)	diameter*sin(theta*16)	5*pitch+16*pitch/18	diameter*cos(theta*17)	diameter*sin(theta*17)	5*pitch+17*pitch/18	w_diam
+GW	108	1	diameter*cos(theta*17)	diameter*sin(theta*17)	5*pitch+17*pitch/18	diameter*cos(theta*18)	diameter*sin(theta*18)	5*pitch+18*pitch/18	w_diam
+GE	0
+CM Specify material 
+LD	5	0	0	0	37700000	0
+CM Enable EK Card
+EK	0
+CM Specify excitation
+EX	0	0	1	0	1	0
+CM Specify ground
+GN	-1
+FR,0,1,0,0,868
+PQ -1
+PT -1
+RP,0,37,73,1003,-180,0,5,5

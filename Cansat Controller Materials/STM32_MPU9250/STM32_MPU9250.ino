@@ -38,7 +38,7 @@
       #define SerialPrint 1    // want serial commands?
       #define I2CScan     0    // want to first scan I2C lines?
 
-      float mBias[3] = {470.0, 120.0, 125.0};               // Mag bias due to environment. Units uT    
+      float mBias[3] = {470.0, 120.0, 125.0};         // Mag bias due to environment. Units uT    
       float aSF[3]   = {0.98861, 0.98924, 0.98900};   // Scale factor for acc
       #define MagDeclination 0.0                      // Magnetic declination
 

@@ -16,12 +16,15 @@
       float gBias[3] = {0.0, 0.0, 0.0};   // Gyr bias
     // AHRS
       // Orientations
-        float qMad[4] = {1.0f, 0.0f, 0.0f, 0.0f};   // Madgwick quaternion
-        float qMah[4] = {1.0f, 0.0f, 0.0f, 0.0f};   // Mahony   quaternion
+        float qMad[4] = {1.0f, 0.0f, 0.0f, 0.0f};   // Madgwick quaternion x,y,z,w
+        float qMah[4] = {1.0f, 0.0f, 0.0f, 0.0f};   // Mahony   quaternion x,y,z,w
         float Mad_Euler[3] = {0.0f,0.0f,0.0f};      // Madgwick euler angles    Yaw, pitch, roll
         float Mah_Euler[3] = {0.0f,0.0f,0.0f};      // Mahony   euler angles
+        float Init_Dir_Vector[3] = {0.0, 0.0, 1.0};     // Initial direction vector
+        float Mad_Dir_Vector[3]  = {0.0, 0.0, 1.0};     // Current direction vector (Madgwick)
+        float Mah_Dir_Vector[3]  = {0.0, 0.0, 1.0};     // Current direction vector (Mahony)
       // Filter Settings
-        float GyroMeasError = PI * (40.0f / 180.0f);      // gyroscope measurement error in rads/s (start at 40 deg/s)
+        float GyroMeasError = PI * (80.0f / 180.0f);      // gyroscope measurement error in rads/s (start at 40 deg/s)
         float GyroMeasDrift = PI * (0.0f  / 180.0f);      // gyroscope measurement drift in rad/s/s (start at 0.0 deg/s/s)
         float beta = sqrt(3.0f / 4.0f) * GyroMeasError;   // compute beta, larger = faster = less accurate
         float zeta = sqrt(3.0f / 4.0f) * GyroMeasDrift;   // compute zeta, in Madgwick scheme usually set to a small or zero value
@@ -32,13 +35,12 @@
         uint32_t lastUpdate = 0, firstUpdate = 0; // used to calculate integration interval
         uint32_t Now = 0;                         // used to calculate integration interval
         float eInt[3] = {0.0f, 0.0f, 0.0f};       // vector to hold integral error for Mahony method
-
     
     // Change these variables
       #define SerialPrint 1    // want serial commands?
-      #define I2CScan     0    // want to first scan I2C lines?
 
-      float mBias[3] = {470.0, 120.0, 125.0};         // Mag bias due to environment. Units uT    
+      float mBias[3] = {32.0, 15.0, -77.0};           // Mag bias 
+      float mSF[3]   = {1.00000, 1.00000, 1.00000};   // Scale factor for mag           
       float aSF[3]   = {0.98861, 0.98924, 0.98900};   // Scale factor for acc
       #define MagDeclination 0.0                      // Magnetic declination
 
@@ -50,7 +52,7 @@
     // Setup serial
       if(SerialPrint){Serial.begin(115200);}
       if(SerialPrint){while (!Serial){}}                  // Wait for serial monitor to open
-      if(SerialPrint){Serial.println("STM32 MPU-9250");}
+      //if(SerialPrint){Serial.println("STM32 MPU-9250");}
       
     // Setup I2C
       Wire.setSDA(PB9);
@@ -61,17 +63,17 @@
       I2C_Scan(0);      // perform I2C scan: 1 = debug printing, 0 = no printing
       
     // Start IMU
-      if(SerialPrint){Serial.print("MPU9250... ");}
+      //if(SerialPrint){Serial.print("MPU9250... ");}
       int IMU_status = IMU_Begin(0);                      // Start IMU: 1 = debug printing, 0 = no printing
       if(IMU_status){                                     // if any errors, stop program
-        if(SerialPrint){Serial.print("ERROR ID: "+String(IMU_status));}
+        //if(SerialPrint){Serial.print("ERROR ID: "+String(IMU_status));}
         while(1){};                                                       
       }
-      Serial.println("Good");      
+      //Serial.println("Good");      
       IMU_Zero_Acc(aBias);    // Zero accelerometer
       IMU_Zero_Gyr(gBias);    // Zero gyroscope
     // Other stuff
-      delay(100);
+      //delay(100);
   }
 
   // ------------------------------------------------------------------------------------------------- //
@@ -80,33 +82,59 @@
 
   void loop() {
 
-    // IMU
-      IMU_Get_Data_Average(IMU_Data,2);   // Get average of n readings 
+    for(int i=0; i<10;i++){
+      // IMU
+        IMU_Get_Data(IMU_Data);
+        //IMU_Get_Data_Average(IMU_Data,2);   // Get average of n readings 
+  
+      // AHRS
+        // Timing things
+          Now = micros();
+          deltat = ((Now - lastUpdate)/1000000.0f); // set integration time by time elapsed since last filter update
+          lastUpdate = Now;
+          sum += deltat; // sum for averaging filter update rate
+  
+        // Filter and AHRS
+          Mad_Update(IMU_Data[0], IMU_Data[1], IMU_Data[2], IMU_Data[3]*PI/180.0f, IMU_Data[4]*PI/180.0f, IMU_Data[5]*PI/180.0f, IMU_Data[7],  IMU_Data[6], IMU_Data[8]);
+          Mah_Update(IMU_Data[0], IMU_Data[1], IMU_Data[2], IMU_Data[3]*PI/180.0f, IMU_Data[4]*PI/180.0f, IMU_Data[5]*PI/180.0f, IMU_Data[7],  IMU_Data[6], IMU_Data[8]);
+      
+          Calc_Euler_Angles(qMad[0],qMad[1],qMad[2],qMad[3],Mad_Euler);
+          Calc_Euler_Angles(qMah[0],qMah[1],qMah[2],qMah[3],Mah_Euler);
+  
+          //Calc_Dir_Vector(qMad[0],qMad[1],qMad[2],qMad[3],Mad_Dir_Vector);
+          //Calc_Dir_Vector(qMah[0],qMah[1],qMah[2],qMah[3],Mah_Dir_Vector);
 
-    // AHRS
-      // Timing things
-        Now = micros();
-        deltat = ((Now - lastUpdate)/1000000.0f); // set integration time by time elapsed since last filter update
-        lastUpdate = Now;
-        sum += deltat; // sum for averaging filter update rate
+          Mad_Euler[0] += Mad_Euler[0];
+          Mad_Euler[1] += Mad_Euler[1];
+          Mad_Euler[2] += Mad_Euler[2];
 
-      // Filter and AHRS
-        Mad_Update(IMU_Data[0], IMU_Data[1], IMU_Data[2], IMU_Data[3]*PI/180.0f, IMU_Data[4]*PI/180.0f, IMU_Data[5]*PI/180.0f, IMU_Data[7],  IMU_Data[6], IMU_Data[8]);
-        Mah_Update(IMU_Data[0], IMU_Data[1], IMU_Data[2], IMU_Data[3]*PI/180.0f, IMU_Data[4]*PI/180.0f, IMU_Data[5]*PI/180.0f, IMU_Data[7],  IMU_Data[6], IMU_Data[8]);
+          Mah_Euler[0] += Mah_Euler[0];
+          Mah_Euler[1] += Mah_Euler[1];
+          Mah_Euler[2] += Mah_Euler[2];
+    }
     
-        AHRS_Update(qMad[0],qMad[1],qMad[2],qMad[3],Mad_Euler);
-        AHRS_Update(qMah[0],qMah[1],qMah[2],qMah[3],Mah_Euler);
+    Mad_Euler[0] /= 10;
+    Mad_Euler[1] /= 10;
+    Mad_Euler[2] /= 10;
+  
+    Mah_Euler[0] /= 10;
+    Mah_Euler[1] /= 10;
+    Mah_Euler[2] /= 10;
 
-    // Serial print if u wanna ;3
-      if(SerialPrint){
-        Serial.println("Mad Yaw: "+String(Mad_Euler[0],1)+"\t Pitch: "+String(Mad_Euler[1],1)+"\t Roll: "+String(Mad_Euler[2],1));
-        Serial.println("Mah Yaw: "+String(Mah_Euler[0],1)+"\t Pitch: "+String(Mah_Euler[1],1)+"\t Roll: "+String(Mah_Euler[2],1));
+    // Serial print if u wanna
+      if(1){
+        //Serial.println("Mad Yaw: "+String(Mad_Euler[0],1)+"\t Pitch: "+String(Mad_Euler[1],1)+"\t Roll: "+String(Mad_Euler[2],1));
+        //Serial.println("Mah Yaw: "+String(Mah_Euler[0],1)+"\t Pitch: "+String(Mah_Euler[1],1)+"\t Roll: "+String(Mah_Euler[2],1));
+        Serial.print(String(Mad_Euler[0],2)+","+String(Mad_Euler[1],2)+","+String(Mad_Euler[2],2));
+        //Serial.print(",");
+        //Serial.print(String(Mah_Euler[0],2)+","+String(Mah_Euler[1],2)+","+String(Mah_Euler[2],2));
+        //Serial.print(String(10*Mad_Dir_Vector[0],3)+","+String(10*Mad_Dir_Vector[1],3)+","+String(10*Mad_Dir_Vector[2],3));
         Serial.println("");
       }
       
-    /*
+    
     // Serial print if u wanna
-      if(SerialPrint){
+      if(0){
         Serial.print("Acc XYZ: ");  
         Serial.print(String(IMU_Data[0],2)+"\t"+String(IMU_Data[1],2)+"\t"+String(IMU_Data[2],2)+"\t");
         Serial.print("Gyr XYZ: ");  
@@ -116,14 +144,14 @@
         //Serial.print("Temp °C: ");        
         //Serial.print(String(IMU_Data[9],1)+"\t");
         Serial.println("");
-      }*/
+      }
   }
 
   // ------------------------------------------------------------------------------------------------- //
   // ------------------------------------------- Functions ------------------------------------------- //
   // ------------------------------------------------------------------------------------------------- //
       
-    void    IMU_Get_Data(float * dest){
+    void IMU_Get_Data(float * dest){
     I2C_Read_Byte(MPU_I2C_ADD,0x3B,14,I2C_buffer);  // Read MPU acc, temp, gyro
 
     dest[0] = (float)((int16_t)(I2C_buffer[ 0]<<8 | I2C_buffer[ 1]))*16.0/32768.0;   // Acc X
@@ -150,11 +178,11 @@
     dest[7] = (float)((int16_t)(I2C_buffer[ 3]<<8 | I2C_buffer[ 2]))*10.0*4912.0/32760.0*mScaleY;   // Mag Y
     dest[8] = (float)((int16_t)(I2C_buffer[ 5]<<8 | I2C_buffer[ 4]))*10.0*4912.0/32760.0*mScaleZ;   // Mag Z
 
-    dest[6] -= mBias[0];    // Correct for magnetic bias
-    dest[7] -= mBias[1];
-    dest[8] -= mBias[2];
+    dest[6] = dest[6]*mSF[0] - mBias[0];    // Correct for scale factor then zero
+    dest[7] = dest[7]*mSF[1] - mBias[1];
+    dest[8] = dest[8]*mSF[2] - mBias[2];
   }
-    void    IMU_Get_Data_Average(float * dest, int SumNo){
+    void IMU_Get_Data_Average(float * dest, int SumNo){
       
       float Sums[10]={};   // tempoary store
       
@@ -171,7 +199,7 @@
       }
       
     }
-    int     IMU_Begin(int Serial_Debug){    
+    int  IMU_Begin(int Serial_Debug){    
       // check if serial printing is allowed and if it isnt, dont print
         if(SerialPrint==0){Serial_Debug = 0;}
       
@@ -207,7 +235,7 @@
   
         return 0;   // Returns 0 if works
     }
-    void    I2C_Scan(int Serial_Debug){
+    void I2C_Scan(int Serial_Debug){
       // check if serial printing is allowed and if it isnt, dont print
         if(SerialPrint==0){Serial_Debug = 0;}
 
@@ -235,7 +263,7 @@
         
       if (nDevices == 0){if(Serial_Debug){Serial.println("No devices found");}}      
     }
-    int     I2C_Write(uint8_t devaddress, uint8_t subaddress, uint8_t data){
+    int  I2C_Write(uint8_t devaddress, uint8_t subaddress, uint8_t data){
       Wire.beginTransmission(devaddress);   // Transmit to target device
       Wire.write(subaddress);               // Specify which subaddress
       Wire.write(data);                     // Write data
@@ -249,7 +277,7 @@
         return -1;                          // If wrong, output -1
       }  
     }
-    void    I2C_Read_Byte(uint8_t devaddress, uint8_t subaddress, uint8_t count, uint8_t * dest){
+    void I2C_Read_Byte(uint8_t devaddress, uint8_t subaddress, uint8_t count, uint8_t * dest){
       Wire.beginTransmission(devaddress);         // Transmit to target device
       Wire.write(subaddress);                     // Specify what subaddress
       Wire.endTransmission(false);                // Leave I2C lines online
@@ -257,15 +285,15 @@
       Wire.requestFrom(devaddress,count);         // Request bytes
       while(Wire.available()){dest[i++] = Wire.read();}
     }
-    uint8_t MPU_whoAmI(){
+    byte MPU_whoAmI(){
        I2C_Read_Byte(MPU_I2C_ADD, 0x75,1,I2C_buffer);
       return I2C_buffer[0];
     }
-    uint8_t AK8963_whoAmI(){
+    byte AK8963_whoAmI(){
       I2C_Read_Byte(AK8_I2C_ADD, 0x00,1,I2C_buffer);
       return I2C_buffer[0];
     }    
-    void    IMU_Zero_Acc(float * dest){
+    void IMU_Zero_Acc(float * dest){
       float aXSum, aYSum, aZSum;
     
       for(int i = 0; i<50; i++){
@@ -284,7 +312,7 @@
       aBias[1] = -aYSum;
       aBias[2] = 1.0-aZSum;      
     }
-    void    IMU_Zero_Gyr(float * dest){
+    void IMU_Zero_Gyr(float * dest){
       float gXSum, gYSum, gZSum;
     
       for(int i = 0; i<50; i++){
@@ -300,7 +328,7 @@
       gBias[2] = gZSum/50;
       
     }
-    void    Mad_Update(float ax, float ay, float az, float gx, float gy, float gz, float mx, float my, float mz){
+    void Mad_Update(float ax, float ay, float az, float gx, float gy, float gz, float mx, float my, float mz){
       float q1 = qMad[0], q2 = qMad[1], q3 = qMad[2], q4 = qMad[3];   // short name local variable for readability
       float norm;
       float hx, hy, _2bx, _2bz;
@@ -381,7 +409,7 @@
         qMad[2] = q3 * norm;
         qMad[3] = q4 * norm;
       }
-    void    Mah_Update(float ax, float ay, float az, float gx, float gy, float gz, float mx, float my, float mz){
+    void Mah_Update(float ax, float ay, float az, float gx, float gy, float gz, float mx, float my, float mz){
       float q1 = qMah[0], q2 = qMah[1], q3 = qMah[2], q4 = qMah[3];   // short name local variable for readability
       float norm;
       float hx, hy, bx, bz;
@@ -463,14 +491,37 @@
         qMah[2] = q3 * norm;
         qMah[3] = q4 * norm;
   }
-    void    AHRS_Update(float q1, float q2, float q3, float q4, float * Euler_Angles){
-      Euler_Angles[0]  = atan2(2.0f * (q2*q3 + q1*q4), q1*q1 + q2*q2 - q3*q3 - q4*q4);   
+    void Calc_Euler_Angles(float q1, float q2, float q3, float q4, float * Euler_Angles){
+      // Euler_Angles[0] = Yaw
+      // Euler_Angles[1] = Pitch
+      // Euler_Angles[2] = Roll
+      Euler_Angles[0]  = atan2(2.0f * (q2*q3 + q1*q4), q1*q1 + q2*q2 - q3*q3 - q4*q4);
       Euler_Angles[1]  = -asin(2.0f * (q2*q4 - q1*q3));
       Euler_Angles[2]  = atan2(2.0f * (q1*q2 + q3*q4), q1*q1 - q2*q2 - q3*q3 + q4*q4);
       Euler_Angles[1] *= 180.0f / PI;
       Euler_Angles[0] *= 180.0f / PI; 
       Euler_Angles[0] -= MagDeclination;
       Euler_Angles[2] *= 180.0f / PI;
+    }
+    void Calc_Dir_Vector(float q1, float q2, float q3, float q4, float * Dir_Vector){
+
+      float Vx = Init_Dir_Vector[0];
+      float Vy = Init_Dir_Vector[1];
+      float Vz = Init_Dir_Vector[2];
+      
+      float temp1 = 2.0f * (q1*Vx + q2*Vy + q3*Vz);
+      float temp2 = (q4*q4) - (q1*q1 + q2*q2 + q3*q3);
+      float temp3 = 2.0f * q4;
+
+      float VxNew = temp1*q1 + temp2*Vx + temp3*(q2*Vz - q3*Vy);
+      float VyNew = temp1*q2 + temp2*Vy + temp3*(q3*Vx - q1*Vz);
+      float VzNew = temp1*q3 + temp2*Vz + temp3*(q1*Vy - q2*Vx);
+
+      float total = sqrtf(VxNew*VxNew + VyNew*VyNew + VzNew*VzNew);
+
+      Dir_Vector[0] = VxNew/total;
+      Dir_Vector[1] = VyNew/total;
+      Dir_Vector[2] = VzNew/total;
     }
     
     
